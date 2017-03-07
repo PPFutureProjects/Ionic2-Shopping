@@ -1,0 +1,19 @@
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>Create a New Session Note</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+   <ion-list>
+    <button ion-item detail-push (click)="itemSelected('Regular')"  >Regular Session</button>
+    <button ion-item detail-push (click)="itemSelected('Cancelled')"  > Cancelled Session</button>
+    <button ion-item detail-push (click)="itemSelected('Makeup')" > Makeup Session</button>
+   </ion-list>
+</ion-content>
+

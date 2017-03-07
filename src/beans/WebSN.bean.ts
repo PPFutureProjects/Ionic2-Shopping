@@ -1,0 +1,61 @@
+
+
+
+export class WebSN{
+     employeeId: number;
+     studentId: string;
+     sessionId: number;
+     status: string;
+     sessionDate: string;
+     timeIn: string;
+     timeOut: string;
+     dateNoteWritten: string;
+     ifspId: string;
+     selectIcdCode: string;
+     selectIcdCode2: string;
+     serviceBegin: string;
+     serviceEnd: string;
+     serviceType: string;
+     serviceMethodType: string;
+     serviceDuration: number;
+     ifspServiceLocation: string;
+     cptCode1: string;
+     cpt1Unit: number;
+     cptCode2: string;
+     cpt2Unit: number;
+     cptCode3: string;
+     cpt3Unit: number;
+     cptCode4: string;
+     cpt4Unit: number;
+     hcpcsCode: string;
+     hcpcsUnit: number;
+     sessionParticipantsChild: boolean;
+     sessionParticipantsParent: boolean;
+     sessionParticipantsOther: boolean;
+     sessionParticipantsOtherName: string;
+     parentUnavailable:string;
+     ifspProgress: string;
+     additionalInfo: string;
+     outcomeAndObjectives: string;
+     objectives: Array<string>;
+     activities: Array<string>;
+     parentCaregiver:  Array<string>;
+     strategiesBetweenVisits: string;
+     therapistSignature: string;
+     therapistSignatureDate: any; 
+     license: string;
+     therapistCredentials: string;
+     parentSignature: string;
+     parentSignatureDate: any;
+     signedRelationship: string;
+     signedRelationshipOther: string;
+     lastMakeupDate: string;
+     cancelledReason: string;
+     otherReason: string;
+     notified: string;
+     makeupDate: string;
+     makeupDateDisplay: string;
+     delayReason: string;
+     sessionCode: number;
+    absentCardId: number;
+}

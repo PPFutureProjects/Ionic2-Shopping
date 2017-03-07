@@ -1,0 +1,28 @@
+.regular-session {
+
+}
+
+ .boldLabel{
+    font-weight:bold;
+ }
+
+ .boldText{
+    font-size: 16px;
+ }
+ div.alert-radio-label, div.alert-checkbox-label{
+    white-space: normal !important;
+ }
+
+  .picker-wrapper {
+    bottom: 30%;
+  }
+
+  .invalid {
+            border: 1px solid #ea6153;
+  }
+  .error{
+    color: red;
+    white-space: normal !important;
+    margin:1px !important;
+}
+

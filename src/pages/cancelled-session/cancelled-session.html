@@ -1,0 +1,70 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{pageTitle}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <button ion-fab mini (click)="addAnother()" *ngIf="displayFields"><ion-icon name="add"></ion-icon></button>
+  <form #form="ngForm"  novalidate  *ngIf="displayFields">
+    <ion-list>
+      <ion-card *ngFor="let cancelled of cancelledDates; let ci = index">
+        <ion-card-content>
+      <ion-item>
+        <ion-label>Session Date</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" name="sessionDate{{ci}}" [attr.id]="'sessionDate'+ci" [(ngModel)]="cancelledDates[ci].sessionDate" 
+           ngControl="cancelledDates[ci].sessionDate"  (ionChange)="sessionDateChanged()"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Last Makeup Date:</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY"  disabled name="makeupDate{{ci}}" [attr.id]="'makeupDate'+ci"  [(ngModel)]="cancelledDates[ci].lastMakeupDate"  ngControl="cancelledDates[ci].lastMakeupDate"  ></ion-datetime>
+      </ion-item>
+      <ion-icon name="trash" (click)="removeSessionDate(ci)" *ngIf="ci > 0"></ion-icon>
+        </ion-card-content>
+      </ion-card> 
+      <ion-item>
+             <ion-label stacked>Reason</ion-label>
+             <ion-select [(ngModel)]="selectedSN.cancelledReason"  name="reason"  multiple="false"  >
+              <ion-option *ngFor="let oo of reasons" value="{{oo}}">{{oo}}</ion-option>
+             </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Reason for cancellation</ion-label>
+        <ion-textarea [(ngModel)]="selectedSN.otherReason" name="otherReason"></ion-textarea>
+      </ion-item>
+      <button ion-button (click)="verifyForm(form)" [disabled]="!form.valid">Verify</button>
+      <button ion-button (click)="saveAndSign(form)" [disabled]="!form.valid">Save & Sign</button>
+    </ion-list>
+  </form>
+
+
+    <div [formGroup]="sigForm"   *ngIf="displayTherapistSignature">
+   <signature-field formControlName="signatureField" [options]="signaturePadOptions" [t]="this"></signature-field>
+   <ion-item *ngIf="displayTherapistSignature">
+     <span class="boldLabel">Signed on:</span>
+     <span class="boldText"> {{selectedSN.therapistSignatureDate}}</span>
+   </ion-item>
+   <ion-item *ngIf="displayTherapistSignature">
+     <span class="boldLabel">License:</span>
+     <span class="boldText"> {{selectedSN.license}}</span>
+   </ion-item>
+   <ion-item *ngIf="displayTherapistSignature">
+     <span class="boldLabel">Credentials:</span>
+     <span class="boldText"> {{selectedSN.therapistCredentials}}</span>
+   </ion-item>
+
+   <button ion-button (click)="backSignature()" >Back</button>
+   <button ion-button (click)="clearSignature()" >Clear</button>
+   <button ion-button (click)="saveSignature()" >Save</button>
+  </div>
+
+
+  <div *ngIf="displayFinishedButtons">
+   <button ion-button block (click)="submitSN()" >Submit Session Note</button>
+   <button ion-button block (click)="reviewAll()" >Review all Session Notes</button>
+   <button ion-button block (click)="startNew()" >Start a new Session Note</button>
+  </div>
+
+</ion-content>

@@ -1,0 +1,37 @@
+<!--
+  Generated template for the ReviewSavedPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>Session Notes to Edit/Submit</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding class="review-saved">
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let sn of sessionNotes | orderBy: ['sessionType', 'sessionDateDisplay']; let ci = index"  #item>
+
+     <ion-item  detail-push>
+       <span style="float:right !important; font-size: 12px !important; padding-left: 4px !important;">{{sn.sessionDateDisplay}} </span>
+       <h2>{{sn.sessionType}} Session</h2>
+       <h3>{{sn.lastName}}, {{sn.firstName}} - {{sn.studentId}}</h3>
+       <h3>Status: {{sn.statusDisplay}}</h3>
+     </ion-item>
+  
+     <ion-item-options>
+       <button ion-button large color="primary" (click)="submitSelected(ci)"  icon-left *ngIf="!sn.editable"><ion-icon name="cloud-upload" ></ion-icon>Submit</button>
+       <button ion-button large color="primary" (click)="editSelected(ci)"  icon-left *ngIf="sn.editable"><ion-icon name="cloud-build" ></ion-icon> Edit </button>
+       <button ion-button color="danger"  (click)="deleteClicked(ci)" icon-left><ion-icon name="trash"></ion-icon> Delete</button>
+     </ion-item-options>
+   </ion-item-sliding>
+  </ion-list>
+</ion-content>

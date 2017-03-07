@@ -1,0 +1,258 @@
+<!--
+  Generated template for the RegularSessionPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{pageTitle}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div *ngIf="!makeupDTChosen">
+      <h2>This is a makeup for one of the following sessions; Please select a date </h2>
+ <ion-list  class="dateList">
+   <ion-item *ngFor="let mk of makeupForList" (click)="makeupDateSelected(mk)" >
+            {{mk.makeupDateDisplay}}
+   </ion-item>
+ </ion-list>
+    </div>
+    <form #form="ngForm"  novalidate (ngSubmit)="onSubmit()" ng-show="displayFields"  *ngIf="displayFields && makeupDTChosen">
+    <ion-list>
+      <ion-item>
+        <ion-label>Session Date</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" name="sessionDate" id="sessionDate" [(ngModel)]="selectedSN.sessionDate" ngControl="sessionDate" required  min={{minDate}} max={{maxDate}} (ionChange)="confirmSessionnoteToday()"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Time From</ion-label>
+        <ion-datetime displayFormat="h:mm A"  pickerFormat="h:mm A" name="timeIn" id="timeIn" [(ngModel)]="selectedSN.timeIn" ngControl="timeIn" required></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Time To</ion-label>
+        <ion-datetime displayFormat="h:mm A"  pickerFormat="h:mm A" name="timeOut" id="timeOut" min="{{selectedSN.timeIn}}" [(ngModel)]="selectedSN.timeOut" ngControl="timeOut" required (ionChange)="timeoutChanged">
+        </ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Date Note Written</ion-label>
+        <ion-datetime disabled displayFormat="MM/DD/YYYY" name="dateNoteWritten" id="dateNoteWritten" [(ngModel)]="selectedSN.dateNoteWritten" ngControl="dateNoteWritten" required></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Makeup for</ion-label>
+        <ion-datetime disabled displayFormat="MM/DD/YYYY" name="makeupfor" id="makeupfor" [(ngModel)]="selectedSN.makeupDate" ngControl="makeupDate" required></ion-datetime>
+      </ion-item>
+      <ion-item no-lines class="item-text-wrap">
+         <h3 style="padding-top:4px !important; white-space: normal !important">This is the ICD-10 code as it appears on the child’s IFSP. You may either change the code or add an additional code</h3>
+      </ion-item>
+      <ion-item no-lines >
+         <ion-label>ICD10 Code</ion-label>
+         <ion-select [(ngModel)]="selectedSN.selectIcdCode" name="selectIcdCode"  multiple="false" (ionChange)="icd10Selected()" required> 
+           <ion-option *ngFor="let icd of icd10Codes" value="{{icd.icd10Code}}"><span style="font-weight:bold!important">{{icd.icd10Code}}</span> {{icd.description}}</ion-option>
+         </ion-select>
+      </ion-item>
+      <ion-item>
+         <ion-label>ICD10-2 Code</ion-label>
+         <ion-select [(ngModel)]="selectedSN.selectIcdCode2" name="selectIcdCode2"  multiple="false" (ionChange)="icd10Selected()"> 
+           <ion-option *ngFor="let icd2 of icd10Codes" value="{{icd2.icd10Code}}"><span style="font-weight:bold!important">{{icd2.icd10Code}}</span> {{icd2.description}}</ion-option>
+         </ion-select>
+      </ion-item>
+      <ion-item> 
+        <ion-label>IFSP Service Duration:</ion-label>
+        <ion-input type="text" [(ngModel)]="selectedSN.serviceDuration" name="serviceDuration" id="serviceDuration" ngControl="serviceDuration" readonly></ion-input>
+      </ion-item>
+      <ion-item> 
+        <ion-label>Location:</ion-label>
+        <ion-input type="text" [(ngModel)]="selectedSN.ifspServiceLocation" name="location" id="location" ngControl="location" readonly></ion-input>
+      </ion-item>
+      <!-- TODO: Somehow we need to put this in a directive-->
+      
+        
+          <ion-row>
+            <ion-col width-50>
+            <ion-item>
+             <ion-label stacked>CPT Code</ion-label>
+               <ion-select [(ngModel)]="selectedSN.cptCode1"  name="cptCode1" multiple="false">
+                <ion-option *ngFor="let cpt of cptCodes" value="{{cpt}}">{{cpt}}</ion-option>
+               </ion-select>
+             </ion-item>
+            </ion-col>
+ 
+            <ion-col width-50>
+              <ion-item>
+                <ion-label stacked>Units</ion-label>
+                 <ion-select [(ngModel)]="selectedSN.cpt1Unit"  name="cpt1Unit" multiple="false">
+                   <ion-option *ngFor="let unit of [1,2,3,4]" value="{{unit}}">{{unit}}</ion-option>
+                  </ion-select> 
+                 </ion-item>
+               </ion-col>
+            </ion-row>
+          
+          <ion-row>
+            <ion-col width-50>
+            <ion-item>
+             <ion-label stacked>CPT Code</ion-label>
+               <ion-select [(ngModel)]="selectedSN.cptCode2"  name="cptCode2"  multiple="false">
+                <ion-option *ngFor="let cpt of cptCodes" value="{{cpt}}">{{cpt}}</ion-option>
+               </ion-select>
+             </ion-item>
+            </ion-col>
+ 
+            <ion-col width-50>
+              <ion-item>
+                <ion-label stacked>Units</ion-label>
+                 <ion-select [(ngModel)]="selectedSN.cpt2Unit"  name="cpt2Unit"   multiple="false">
+                   <ion-option *ngFor="let unit of [1,2,3,4]" value="{{unit}}">{{unit}}</ion-option>
+                  </ion-select> 
+                 </ion-item>
+               </ion-col>
+            </ion-row>
+
+
+
+          <ion-row>
+            <ion-col width-50>
+            <ion-item>
+             <ion-label stacked>CPT Code</ion-label>
+               <ion-select [(ngModel)]="selectedSN.cptCode3"  name="cptCode3" multiple="false">
+                <ion-option *ngFor="let cpt of cptCodes" value="{{cpt}}">{{cpt}}</ion-option>
+               </ion-select>
+             </ion-item>
+            </ion-col>
+ 
+            <ion-col width-50>
+              <ion-item>
+                <ion-label stacked>Units</ion-label>
+                 <ion-select [(ngModel)]="selectedSN.cpt3Unit"  name="cpt3Unit" multiple="false">
+                   <ion-option *ngFor="let unit of [1,2,3,4]" value="{{unit}}">{{unit}}</ion-option>
+                  </ion-select> 
+                 </ion-item>
+               </ion-col>
+            </ion-row>
+          
+          <ion-row>
+            <ion-col width-50>
+            <ion-item>
+             <ion-label stacked>CPT Code</ion-label>
+               <ion-select [(ngModel)]="selectedSN.cptCode4"  name="cptCode4"  multiple="false">
+                <ion-option *ngFor="let cpt of cptCodes" value="{{cpt}}">{{cpt}}</ion-option>
+               </ion-select>
+             </ion-item>
+            </ion-col>
+ 
+            <ion-col width-50>
+              <ion-item>
+                <ion-label stacked>Units</ion-label>
+                 <ion-select [(ngModel)]="selectedSN.cpt4Unit"  name="cpt4Unit"   multiple="false">
+                   <ion-option *ngFor="let unit of [1,2,3,4]" value="{{unit}}">{{unit}}</ion-option>
+                  </ion-select> 
+                 </ion-item>
+               </ion-col>
+            </ion-row>
+
+            <ion-item no-lines>
+               <h3 class="boldLabel">Session Participants</h3>
+            </ion-item>
+            <ion-item no-lines>
+              <ion-label>Child</ion-label>
+              <ion-checkbox [(ngModel)]="selectedSN.sessionParticipantsChild"  name="sessionParticipantsChild"  ng-disabled="readonly"></ion-checkbox>
+            </ion-item>
+            <ion-item no-lines>
+              <ion-label>Parent/Cargiver</ion-label>
+              <ion-checkbox [(ngModel)]="selectedSN.sessionParticipantsParent"  name="sessionParticipantsParent" ng-disabled="readonly"></ion-checkbox>
+            </ion-item>
+            <ion-item  no-lines>
+              <ion-label>Other:</ion-label>
+              <ion-checkbox [(ngModel)]="selectedSN.sessionParticipantsOther"  name="sessionParticipantsOther" ng-disabled="readonly"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+              <ion-label>Other Participants:</ion-label>
+              <ion-input type="text"  [(ngModel)]="selectedSN.sessionParticipantsOtherName"  name="sessionParticipantsOtherName"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Parents Unavailable:</ion-label>
+              <ion-input type="text"  [(ngModel)]="selectedSN.parentUnavailable"  name="parentUnavailable"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>IFSP Progress:</ion-label>
+              <ion-input type="text"  [(ngModel)]="selectedSN.ifspProgress"  name="ifspProgress"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked>Additional information if necessary:</ion-label>
+              <ion-input type="text"  [(ngModel)]="selectedSN.additionalInfo"  name="additionalInfo"></ion-input>
+            </ion-item>
+            <ion-item>
+             <ion-label stacked>Outcome</ion-label>
+             <ion-select [(ngModel)]="selectedSN.outcomeAndObjectives"  name="outcomes"  multiple="false"  (ionChange)="outcomeSelected(selectedSN.outcomeAndObjectives)">
+              <ion-option *ngFor="let oo of outcomes" value="{{oo.outcome}}">{{oo.outcome}}</ion-option>
+             </ion-select>
+            </ion-item>
+            <ion-item>
+             <ion-label stacked>Objectives</ion-label>
+             <ion-select [(ngModel)]="selectedSN.objectives"  name="objectives"  multiple="true"  (ionChange)="objectivesSelected()">
+              <ion-option *ngFor="let oo of objectives" value="{{oo}}">{{oo}}</ion-option>
+             </ion-select>
+            </ion-item>
+            <ion-item>
+             <ion-label stacked>Activities</ion-label>
+             <ion-select [(ngModel)]="selectedSN.activities"  name="activties"  multiple="true" >
+              <ion-option *ngFor="let oo of activities" value="{{oo.value}}">{{oo.label}}</ion-option>
+             </ion-select>
+            </ion-item>
+            <ion-item>
+             <ion-label stacked>Coach Parent/Caregiver:</ion-label>
+             <ion-select [(ngModel)]="selectedSN.parentCaregiver"  name="parentCaregiver"  multiple="true" >
+              <ion-option *ngFor="let oo of parentCaregiver" value="{{oo}}">{{oo}}</ion-option>
+             </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked>Strategies between visits:</ion-label>
+              <ion-input type="text"  [(ngModel)]="selectedSN.strategiesBetweenVisits"  name="strategiesBetweenVisits"></ion-input>
+            </ion-item>
+            <button ion-button (click)="verifyForm(form)" [disabled]="!form.valid">Verify</button>
+            <button ion-button (click)="saveAndSign(form)" [disabled]="!form.valid">Save & Sign</button>
+    </ion-list>
+  </form>
+
+  <div [formGroup]="sigForm"   *ngIf="displayTherapistSignature || displayParentsSignature">
+   <signature-field formControlName="signatureField" [options]="signaturePadOptions" [t]="this"></signature-field>
+   <ion-item *ngIf="displayTherapistSignature">
+     <span class="boldLabel">Signed on:</span>
+     <span class="boldText"> {{selectedSN.therapistSignatureDate}}</span>
+   </ion-item>
+   <ion-item *ngIf="displayTherapistSignature">
+     <span class="boldLabel">License:</span>
+     <span class="boldText"> {{selectedSN.license}}</span>
+   </ion-item>
+   <ion-item *ngIf="displayTherapistSignature">
+     <span class="boldLabel">Credentials:</span>
+     <span class="boldText"> {{selectedSN.therapistCredentials}}</span>
+   </ion-item>
+
+   <ion-item *ngIf="displayParentsSignature">
+     <span class="boldLabel">Signed on:</span>
+     <span class="boldText"> {{selectedSN.parentSignatureDate}}</span>
+   </ion-item>
+   <ion-item *ngIf="displayParentsSignature">
+     <ion-label stacked>Relationship to Child:</ion-label>
+       <ion-select [(ngModel)]="selectedSN.signedRelationship"  name="signedRelationship"  multiple="false" [ngModelOptions]="{standalone: true}">
+          <ion-option *ngFor="let rel of signedRelationships" value="{{rel}}">{{rel}}</ion-option>
+       </ion-select>
+     </ion-item>
+   <ion-item *ngIf="selectedSN.signedRelationship === 'Other'">
+     <ion-label stacked>Other Relationship:</ion-label>
+     <ion-input type="text"  [(ngModel)]="selectedSN.signedRelationshipOther"  name="signedRelationshipOther" [ngModelOptions]="{standalone: true}"></ion-input>
+   </ion-item>
+   <button ion-button (click)="backSignature()" >Back</button>
+   <button ion-button (click)="clearSignature()" >Clear</button>
+   <button ion-button (click)="saveSignature()" >Save</button>
+  </div>
+  <div *ngIf="displayFinishedButtons">
+   <button ion-button block (click)="finalValidation()" >Submit Session Note</button>
+   <button ion-button block (click)="reviewAll()" >Review all Session Notes</button>
+   <button ion-button block (click)="startNew()" >Start a new Session Note</button>
+  </div>
+</ion-content>

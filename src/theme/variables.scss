@@ -1,0 +1,154 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/v2/theming/
+@import "ionic.globals";
+
+
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Ionic's source scss files.
+// To view all the possible Ionic variables, see:
+// http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
+
+$text-color:        #000;
+$background-color:  #fff;
+
+
+// Named Color Variables
+// --------------------------------------------------
+// Named colors makes it easy to reuse colors on various components.
+// It's highly recommended to change the default colors
+// to match your app's branding. Ionic uses a Sass map of
+// colors so you can add, rename and remove colors as needed.
+// The "primary" color is the only required color in the map.
+
+$colors: (
+  primary:    #387ef5,
+  secondary:  #32db64,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222,
+  favorite:   #69BB7B
+);
+
+$item-md-detail-push-show: true;
+$item-wp-detail-push-show: true;
+$item-ios-detail-push-show: true;
+
+
+/*$action-sheet-ios-button-font-size: 2vm ;
+$action-sheet-ios-title-font-size: 1.3vm ;
+$action-sheet-md-button-font-size: 1.6vm ;
+$action-sheet-md-icon-font-size: 2.4vm ;
+$action-sheet-md-title-font-size: 1.6vm ;
+$action-sheet-wp-button-font-size: 1.5vm ;
+$action-sheet-wp-icon-font-size: 2.4vm ;
+$action-sheet-wp-title-font-size: 2vm ;
+$alert-button-font-size: 6vm	;
+$alert-ios-button-font-size: 6vm	;
+$alert-ios-message-font-size: 4vm	;
+$alert-ios-sub-title-font-size: 4.3vm	;
+$alert-ios-title-font-size: 4.8vm	;
+
+$alert-md-message-font-size: 4vm	;
+$alert-md-sub-title-font-size: 4.3vm	;
+$alert-md-title-font-size: 4.8vm	;
+$alert-wp-message-font-size: 3.8vm	;
+$alert-wp-sub-title-font-size: 16px	;
+$alert-wp-title-font-size: 20px	;
+$badge-font-size: 4vm ;
+$button-ios-font-size: 5vm ;
+$button-ios-large-font-size: 5.5vm ;
+$button-ios-small-font-size: 3vm ;
+$button-ios-small-icon-font-size: 3vm	;
+
+$button-md-font-size: 5vm ;
+$button-md-large-font-size: 5.5vm ;
+$button-md-small-font-size: 3vm ;
+$button-md-small-icon-font-size: 3vm	;
+$button-wp-font-size: 1.4vm ;
+$button-wp-large-font-size: 2vm ;
+$button-wp-small-font-size: 1.3vm ;
+$button-wp-small-icon-font-size: 1.4em	;
+$card-ios-font-size: 4.5vm ;
+$card-ios-header-font-size: 5.5vm ;
+$card-ios-title-font-size: 5vm ;
+$card-md-font-size: 4.5w ;
+$card-md-header-font-size: 5.5vm ;
+$card-md-title-font-size: 2.4vm ;
+$card-wp-font-size: 1.4vm ;
+$card-wp-header-font-size: 1.6vm ;
+$card-wp-title-font-size: 2.4vm ;
+$chip-icon-font-size: 18px	;
+$chip-ios-font-size: 13px	;
+$chip-md-font-size: 13px	;
+$chip-wp-font-size: 13px	;
+$font-size-base: 5vm;
+$font-size-ios-base: $font-size-base;
+$font-size-ios-base: $font-size-base;
+$font-size-md-base: $font-size-base;
+$font-size-md-base: $font-size-base;
+$font-size-root:	62.5%	;
+$font-size-wp-base: $font-size-base;
+$font-size-wp-base: $font-size-base;
+$h1-font-size: 5.6vm ;
+$h2-font-size: 4.5vm ;
+$h3-font-size: 3.9vm ;
+$h4-font-size: 3vm ;
+$h5-font-size: 2.8vm ;
+$h6-font-size: 2.6vm ;
+$item-ios-body-text-font-size: 5vm ;
+$item-ios-paragraph-font-size: 4.5vm ;
+$item-md-body-text-font-size: 5vm ;
+$item-md-divider-font-size: $item-md-body-text-font-size;
+$item-md-font-size: 5vm ;
+$item-wp-body-text-font-size: 1.4vm ;
+$item-wp-divider-font-size: 2vm ;
+$item-wp-font-size: 3w ;
+$list-ios-header-font-size: 5vm ;
+$list-md-header-font-size: 5vm ;
+$list-wp-header-font-size: 5vm ;
+$picker-ios-option-font-size: 5vm	;
+$picker-md-option-font-size: 5vm	;
+$picker-wp-option-font-size: 5vm	;
+$range-ios-pin-font-size: 12px	;
+$range-md-pin-font-size: 12px	;
+$range-wp-pin-font-size: 12px	;
+$refresher-icon-font-size: 30px	;
+$refresher-text-font-size: 16px	;
+$searchbar-wp-input-font-size: 4.5vm ;
+$segment-button-ios-font-size: 4.5vm ;
+$segment-button-ios-toolbar-font-size: 4vm ;
+$segment-button-md-font-size: 4vm ;
+$segment-button-wp-font-size: 1.3vm ;
+$tabs-ios-tab-font-size: 10px	;
+$tabs-md-tab-font-size: 4vm ;
+$tabs-md-tab-font-size-active: 4vm ;
+$tabs-wp-tab-font-size: 4vm ;
+$toast-ios-title-font-size: 4vm ;
+$toast-md-title-font-size: 5vm ;
+$toast-wp-title-font-size: 4vm ;
+$toolbar-ios-button-font-size: 3.8vm ;
+$toolbar-ios-title-font-size: 4.5vm ;
+$toolbar-md-button-font-size: 3.8vm ;
+$toolbar-md-title-font-size: 5vm ;
+$toolbar-wp-button-font-size: 1.4vm ;
+$toolbar-wp-title-font-size: 1.5rem;*/
+
+// App Theme
+// --------------------------------------------------
+// Ionic apps can have different themes applied, which can
+// then be future customized. This import comes last
+// so that the above variables are used and Ionic's
+// default are overridden.
+
+@import "ionic.theme.default";
+
+
+// Ionicons
+// --------------------------------------------------
+// The premium icon font for Ionic. For more info, please see:
+// http://ionicframework.com/docs/v2/ionicons/
+
+$ionicons-font-path: "../assets/fonts";
+@import "ionicons";

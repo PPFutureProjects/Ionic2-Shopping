@@ -1,0 +1,32 @@
+<ion-navbar >
+</ion-navbar>
+<ion-content>
+
+
+ <div class="" style="margin: 10px;">
+            <img src="img/oQQX4oMZTyKCXQHJmxtl_Logo.png" width="95%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+</div>
+<form [formGroup]="loginForm"  (ngSubmit)="login(loginForm.value)" >
+<ion-list>
+
+  <ion-item  [class.error]="!username.valid && username.touched">
+    <ion-label floating>Username</ion-label>
+    <ion-input formControlName="username" type="text" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Password</ion-label>
+    <ion-input formControlName="password"  type="password" ></ion-input>
+  </ion-item>
+  <ion-item no-lines>
+      <div *ngIf="loginError && loginError !== ''" class="error">{{loginError}}</div>
+  </ion-item>
+</ion-list>
+
+<div padding>
+  <button  ion-button primary block type="submit" [disabled]="!loginForm.valid" >Sign In</button>
+</div>
+
+</form>
+
+</ion-content>

@@ -1,0 +1,42 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Select a Child</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+ <ion-list  class="childList" overflow-scroll=”true”>
+   <button ion-item  text-wrap *ngFor="let student of allStudents" (click)="studentSelected(student)" detail-none >
+            <span class="studentLabel">{{student.lastName}}, {{student.firstName}}</span> {{student.serviceType}}
+   </button>
+ </ion-list>
+ <div style="border-bottom: 2px solid black !important; width:100% !important;"> </div>
+ <ion-list  *ngIf="studentChosen" class="childList">
+   <ion-item> 
+     <span class="studentLabel">Name:</span>
+     <span class="studentText"> {{selectedStudent.lastName}}, {{selectedStudent.firstName}}</span>
+   </ion-item>
+   <ion-item>
+     <span class="studentLabel">EI ID:</span>
+     <span class="studentText"> {{selectedStudent.studentId}}</span>
+   </ion-item>
+   <ion-item>
+     <span class="studentLabel">Service Type:</span>
+     <span class="studentText"> {{selectedStudent.serviceType}}</span>
+   </ion-item>
+   <ion-item>
+     <span class="studentLabel">Service Begin:</span>
+     <span class="studentText"> {{selectedStudent.serviceBegin}}</span>
+   </ion-item>
+   <ion-item>
+     <span class="studentLabel">Service End:</span>
+     <span class="studentText"> {{selectedStudent.serviceEnd}}</span>
+   </ion-item>
+ </ion-list>
+ <button  ion-button full (click)="childconfirmed()" *ngIf="studentChosen">Begin</button>
+ <!--<button  ion-button full (click)="getMandate()" *ngIf="studentChosen" text-wrap>FYI: IFSP Services - <br/> Approved & Provided</button>-->
+</ion-content>
